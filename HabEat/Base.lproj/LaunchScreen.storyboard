@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,14 +19,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HabEat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXS-wk-TSY">
-                                <rect key="frame" x="219" y="108" width="162" height="90"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2016 Sarah &amp; Connor. All rights reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3I-LZ-Iks">
+                                <rect key="frame" x="86" y="559" width="428" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HabEat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juz-Ix-y6L">
+                                <rect key="frame" x="220" y="71" width="160" height="59"/>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="50"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3hm-X6-Afx"/>
+                            <constraint firstItem="juz-Ix-y6L" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="200" id="Ixv-xS-L1U"/>
+                            <constraint firstItem="juz-Ix-y6L" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KwC-9u-aIt"/>
+                            <constraint firstItem="juz-Ix-y6L" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="200" id="LQD-KE-0JG"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Z3I-LZ-Iks" secondAttribute="bottom" constant="20" id="Ll1-sl-hf8"/>
+                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VNF-gG-0CJ"/>
+                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="20" id="cbL-uL-4Wy"/>
+                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="66" id="uDG-BH-BKM"/>
+                            <constraint firstItem="juz-Ix-y6L" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="1/3" constant="1" id="uaZ-SF-CuU"/>
+                            <constraint firstItem="juz-Ix-y6L" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="1/3" constant="1" id="wso-iq-Hbh"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Ixv-xS-L1U"/>
+                                <exclude reference="LQD-KE-0JG"/>
+                                <exclude reference="uaZ-SF-CuU"/>
+                                <exclude reference="3hm-X6-Afx"/>
+                                <exclude reference="cbL-uL-4Wy"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

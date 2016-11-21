@@ -13,7 +13,7 @@ class RestaurantsViewModel {
     
     // Note: Even if we fake our data we still want to simulate a local area search
     let client = SearchRestaurantsClient()
-    let parser = RestaurantsParser()
+    let parser = RestaurantsParser() // Have not implemented yet
     
     func numberOfRows() -> Int {
         return restaurants.count
@@ -26,7 +26,7 @@ class RestaurantsViewModel {
             return ""
         }
     }
-    func detailViewModelForRowAtIndexPath(indexPath: NSIndexPath) -> FoodMenuViewModel {
+    func foodMenuViewModelForRowAtIndexPath(indexPath: NSIndexPath) -> FoodMenuViewModel {
         return FoodMenuViewModel(restaurant: restaurants[indexPath.row])
     }
     

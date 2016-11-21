@@ -56,7 +56,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         if let foodMenuVC = segue.destinationViewController as? FoodMenuViewController,
             cell = sender as? UITableViewCell,
             indexPath = tableView.indexPathForCell(cell) {
-            foodMenuVC.viewModel =  viewModel.detailViewModelForRowAtIndexPath(indexPath)// ask view model for a food menu view model that corresponds to this restaurant
+            foodMenuVC.viewModel =  viewModel.foodMenuViewModelForRowAtIndexPath(indexPath)// ask view model for a food menu view model that corresponds to this restaurant
         }
     }
     

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="TrebuchetMS.ttf">
+            <string>TrebuchetMS</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -19,31 +24,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2016 Sarah &amp; Connor. All rights reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3I-LZ-Iks">
-                                <rect key="frame" x="86" y="559" width="428" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2016 Sarah &amp; Connor. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Z3I-LZ-Iks">
+                                <rect key="frame" x="0.0" y="559" width="600" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="FER-SG-84L"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loadingPage" translatesAutoresizingMaskIntoConstraints="NO" id="1Gr-YD-O5d">
+                                <rect key="frame" x="101" y="79" width="399" height="441"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="441" id="c3x-63-K7j"/>
+                                    <constraint firstAttribute="width" constant="399" id="qAb-tb-G1B"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HabEat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juz-Ix-y6L">
-                                <rect key="frame" x="220" y="71" width="160" height="59"/>
+                                <rect key="frame" x="220" y="12" width="160" height="59"/>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="50"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="juz-Ix-y6L" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-8" id="21v-PW-ts1"/>
                             <constraint firstItem="Z3I-LZ-Iks" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3hm-X6-Afx"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Z3I-LZ-Iks" secondAttribute="bottom" id="499-ex-aSn"/>
+                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="centerX" secondItem="juz-Ix-y6L" secondAttribute="centerX" id="5gn-66-hty"/>
+                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="A4J-NW-WH5"/>
                             <constraint firstItem="juz-Ix-y6L" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="200" id="Ixv-xS-L1U"/>
-                            <constraint firstItem="juz-Ix-y6L" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KwC-9u-aIt"/>
                             <constraint firstItem="juz-Ix-y6L" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="200" id="LQD-KE-0JG"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Z3I-LZ-Iks" secondAttribute="bottom" constant="20" id="Ll1-sl-hf8"/>
-                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VNF-gG-0CJ"/>
+                            <constraint firstItem="1Gr-YD-O5d" firstAttribute="top" secondItem="juz-Ix-y6L" secondAttribute="bottom" constant="8.5" id="VpX-5e-H0Y"/>
+                            <constraint firstItem="1Gr-YD-O5d" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Xv0-ye-BQs"/>
                             <constraint firstItem="Z3I-LZ-Iks" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="20" id="cbL-uL-4Wy"/>
-                            <constraint firstItem="Z3I-LZ-Iks" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="66" id="uDG-BH-BKM"/>
+                            <constraint firstItem="juz-Ix-y6L" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sgB-if-1kG"/>
                             <constraint firstItem="juz-Ix-y6L" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="1/3" constant="1" id="uaZ-SF-CuU"/>
-                            <constraint firstItem="juz-Ix-y6L" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="1/3" constant="1" id="wso-iq-Hbh"/>
+                            <constraint firstItem="1Gr-YD-O5d" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vAa-Wx-wXx"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -61,4 +79,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="loadingPage" width="1286" height="1600"/>
+    </resources>
 </document>

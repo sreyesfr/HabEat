@@ -7,13 +7,75 @@
 //
 
 import UIKit
+import CoreData
 
 class FoodViewController: UIViewController {
-
+    
+    var viewModel: FoodViewModel?
+    @IBOutlet weak var menuButton:UIBarButtonItem!
+    
+    @IBOutlet weak var foodTitle:UILabel!
+    @IBOutlet weak var foodPicture:UIImageView!
+    @IBOutlet weak var habEatIdx:UILabel!
+    @IBOutlet weak var habEatView:UIView!
+    @IBOutlet weak var switchButton:UISwitch!
+    
+    @IBAction func eatDish() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity =  NSEntityDescription.entityForName("Meal", inManagedObjectContext:managedContext)
+        let meal = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        let dishId = viewModel!.dish.id
+        let dishName = viewModel!.dish.name
+        meal.setValue(dishId, forKey: "dish_id")
+        meal.setValue(dishName, forKey: "name")
+        meal.setValue(NSDate(), forKey: "tmstmp")
+        
+        do {
+            try managedContext.save()
+            meals.append(meal)
+            print(meal)
+            print("Meal was saved")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "Favorite")
+        
+        do {
+            let results =
+                try managedContext.executeFetchRequest(fetchRequest)
+            favorites = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.
+        //foodTitle.text = viewModel!.title()
+        self.navigationItem.title = viewModel!.title()
+        foodPicture.image = UIImage(named: viewModel!.dish.img)
+        habEatIdx.text = String(viewModel!.getHabEatIndex())
+        habEatView.backgroundColor = viewModel!.getBackgroundColor()
+        if viewModel!.isFavorite(){
+            switchButton.setOn(true, animated: true)
+        }
+        
+        if self.revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +84,34 @@ class FoodViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "embeddedSegue") {
+            let childViewController = segue.destinationViewController as! NutritionFactsController
+            childViewController.calories = viewModel!.dish.calories
+            childViewController.fat = viewModel!.dish.fat
+            childViewController.cholesterol = viewModel!.dish.cholesterol
+            childViewController.sodium = viewModel!.dish.sodium
+            childViewController.carbs = viewModel!.dish.carbs
+            
+        } else if (segue.identifier == "backSegue"){
+            if let foodMenuVC = segue.destinationViewController as? FoodMenuViewController {
+                let thisRest = allRestaurants.filter({$0.id == viewModel!.dish.rest_id}).first
+                foodMenuVC.viewModel =  FoodMenuViewModel(restaurant: thisRest!)
+            }
+        }
     }
-    */
+    
+    @IBAction func switchChanged() {
+        if (switchButton.on){
+            viewModel!.addFavorite()
+        } else{
+            viewModel!.removeFavorite()
+        }
+    }
+    
 
 }

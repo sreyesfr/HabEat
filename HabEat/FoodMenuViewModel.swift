@@ -10,14 +10,36 @@ import Foundation
 
 class FoodMenuViewModel {
     
-    // your code here
+    var dishes : [Dish]
     var restaurant: Restaurant
+    
     init(restaurant: Restaurant){
         self.restaurant = restaurant
+        self.dishes = allDishes.filter({$0.rest_id == restaurant.id})
     }
     
     func title() -> String? {
-        return self.restaurant.name
+        return restaurant.name
+    }
+
+    func numberOfRows() -> Int {
+        return dishes.count
     }
     
+    func titleForRowAtIndexPath(indexPath: NSIndexPath) -> String {
+        if indexPath.row < numberOfRows(){
+            return dishes[indexPath.row].name
+        } else {
+            return ""
+        }
+    }
+    func foodViewModelForRowAtIndexPath(indexPath: NSIndexPath) -> FoodViewModel {
+        return FoodViewModel(dish: dishes[indexPath.row])
+    }
+    
+    func refresh(completion: () -> Void) {
+        let result = allDishes.filter({$0.rest_id == restaurant.id})
+        self.dishes = result
+        completion()
+    }
 }

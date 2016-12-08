@@ -9,11 +9,9 @@
 import Foundation
 
 class RestaurantsViewModel {
+    let radius : Double = 10
+    let location : Location = Location()
     var restaurants = [Restaurant]()
-    
-    // Note: Even if we fake our data we still want to simulate a local area search
-    let client = SearchRestaurantsClient()
-    let parser = RestaurantsParser() // Have not implemented yet
     
     func numberOfRows() -> Int {
         return restaurants.count
@@ -27,19 +25,21 @@ class RestaurantsViewModel {
         }
     }
     func foodMenuViewModelForRowAtIndexPath(indexPath: NSIndexPath) -> FoodMenuViewModel {
-        return FoodMenuViewModel(restaurant: restaurants[indexPath.row])
+        return FoodMenuViewModel(restaurant: restaurants[indexPath.row]) // Add in an input for the food items
     }
     
     func refresh(completion: () -> Void) {
-        client.fetchRestaurants { [unowned self] data in
-            
-            // we need in this block a way for the parser to get an array of restaurant
-            // objects (if they exist) and then set the restaurants var in the view model to
-            // those restaurant objects
-            let result = self.parser.restaurantsFromSearchResponse(data)
-            self.restaurants = result!
-            
-            completion()
-        }
+        //location.getCurrentLocation()
+        //let result = allRestaurants.filter({distanceForm(Double($0.latitude), x2: location.latitude, y1: $0.longitude, y2: location.longitude) < radius})
+        //self.restaurants = result
+        self.restaurants = allRestaurants
+        completion()
+    }
+    
+    func distanceForm(x1: Double, x2: Double, y1: Double, y2: Double) -> Double {
+        let xDist = x2-x1
+        let yDist = y2-y1
+        let distance = sqrt((xDist * xDist) + (yDist * yDist))
+        return distance
     }
 }

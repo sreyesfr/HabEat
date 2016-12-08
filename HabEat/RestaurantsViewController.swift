@@ -12,7 +12,9 @@ import MapKit
 class RestaurantsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let viewModel = RestaurantsViewModel()
+    let location = Location()
     
+    @IBOutlet weak var menuButton:UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet var tableView: UITableView!
     
@@ -23,6 +25,31 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
                 self.tableView.reloadData()
             }
         }
+        if self.revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        //Centering the map on our initial location
+        location.getCurrentLocation()
+        let initialLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        //let initialLocation = CLLocation(latitude: 40.441486, longitude: -79.942014)
+        centerMapOnLocation(initialLocation)
+        for restaurant in allRestaurants {
+            let droppedPin = MKPointAnnotation()
+            droppedPin.coordinate = CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude)
+            droppedPin.title = restaurant.name
+            mapView.addAnnotation(droppedPin)
+        }
+
+    }
+    
+    let regionRadius: CLLocationDistance = 400
+    
+    // From Find my Car Part 1
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {

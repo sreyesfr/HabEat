@@ -9,6 +9,6 @@
 struct Restaurant {
     let id: Int
     let name: String
-    let latitude: Int
-    let longitude: Int
+    let latitude: Double
+    let longitude: Double
 }

@@ -21,7 +21,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.refresh { [unowned self] in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
@@ -33,11 +33,10 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         //Centering the map on our initial location
         location.getCurrentLocation()
         let initialLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        //let initialLocation = CLLocation(latitude: 40.441486, longitude: -79.942014)
         centerMapOnLocation(initialLocation)
         for restaurant in allRestaurants {
             let droppedPin = MKPointAnnotation()
-            droppedPin.coordinate = CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude)
+            droppedPin.coordinate = CLLocationCoordinate2D(latitude: restaurant.location.coordinate.latitude, longitude: restaurant.location.coordinate.longitude)
             droppedPin.title = restaurant.name
             mapView.addAnnotation(droppedPin)
         }
@@ -47,25 +46,26 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     let regionRadius: CLLocationDistance = 400
     
     // From Find my Car Part 1
-    func centerMapOnLocation(location: CLLocation) {
+    func centerMapOnLocation(_ location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let selectedRow = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedRow, animated: true)
+            tableView.deselectRow(at: selectedRow, animated: true)
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows()
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text =  viewModel.titleForRowAtIndexPath(indexPath)// ask the view model for the name of the restaurant and put it here
+        cell.detailTextLabel?.text = viewModel.distanceForRowAtIndexPath(indexPath)
         return cell
     }
 
@@ -79,10 +79,10 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let foodMenuVC = segue.destinationViewController as? FoodMenuViewController,
-            cell = sender as? UITableViewCell,
-            indexPath = tableView.indexPathForCell(cell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let foodMenuVC = segue.destination as? FoodMenuViewController,
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell) {
             foodMenuVC.viewModel =  viewModel.foodMenuViewModelForRowAtIndexPath(indexPath)// ask view model for a food menu view model that corresponds to this restaurant
         }
     }

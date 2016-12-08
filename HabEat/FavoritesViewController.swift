@@ -29,16 +29,16 @@ class FavoritesViewController: UITableViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Favorite")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
         
         do {
             let results =
-                try managedContext.executeFetchRequest(fetchRequest)
+                try managedContext.fetch(fetchRequest)
             favorites = results as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -50,19 +50,19 @@ class FavoritesViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favorites.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
-        let favoritesReverse = favorites.reverse() as Array
-        let favorite = favoritesReverse[indexPath.row]
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        let favoritesReverse = favorites.reversed() as Array
+        let favorite = String(describing: favoritesReverse[indexPath.row].value(forKey: "name")!)
+        let detail = String(viewModel.restaurantForRowAtIndexPath(indexPath))
         
-        cell!.textLabel?.text = favorite.valueForKey("name") as! String?
-        //cell!.detailTextLabel?.text = (favorite.valueForKey("calories") as! String?)! + " calories"
+        cell!.textLabel?.text = favorite
+        cell!.detailTextLabel?.text = detail
         
         return cell!
     }
@@ -128,10 +128,10 @@ class FavoritesViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let foodVC = segue.destinationViewController as? FoodViewController,
-            cell = sender as? UITableViewCell,
-            indexPath = tableView.indexPathForCell(cell) {
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let foodVC = segue.destination as? FoodViewController,
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell) {
             foodVC.viewModel =  viewModel.foodViewModelForRowAtIndexPath(indexPath)// ask view model for a food menu view model that corresponds to this restaurant
         }
      }

@@ -26,18 +26,18 @@ class FoodMenuViewModel {
         return dishes.count
     }
     
-    func titleForRowAtIndexPath(indexPath: NSIndexPath) -> String {
+    func titleForRowAtIndexPath(_ indexPath: IndexPath) -> String {
         if indexPath.row < numberOfRows(){
             return dishes[indexPath.row].name
         } else {
             return ""
         }
     }
-    func foodViewModelForRowAtIndexPath(indexPath: NSIndexPath) -> FoodViewModel {
+    func foodViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> FoodViewModel {
         return FoodViewModel(dish: dishes[indexPath.row])
     }
     
-    func refresh(completion: () -> Void) {
+    func refresh(_ completion: () -> Void) {
         let result = allDishes.filter({$0.rest_id == restaurant.id})
         self.dishes = result
         completion()

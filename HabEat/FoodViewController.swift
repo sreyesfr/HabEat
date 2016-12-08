@@ -20,18 +20,43 @@ class FoodViewController: UIViewController {
     @IBOutlet weak var habEatView:UIView!
     @IBOutlet weak var switchButton:UISwitch!
     
-    @IBAction func eatDish() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+    @IBAction func clickedEat(){
+        let perc = Int(viewModel!.getPercentDailyAverage())
+        let title = "Are you sure?"
+        let stringPerc = String(perc)
+        let dishName = viewModel!.dish.name
+        let message = "This " + dishName + " has approximately " + stringPerc + "% of your total daily intake."
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default,
+                                      handler: { action in
+                                        self.eatDish()
+                                        self.goToJournal()})
+        let noAction = UIAlertAction(title: "No", style: .default,
+                                     handler: {action in })
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated:true, completion:nil)
+    }
+    
+    func goToJournal() {
+        self.performSegue(withIdentifier: "journalSegue", sender: self)
+    }
+    
+    func eatDish() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let entity =  NSEntityDescription.entityForName("Meal", inManagedObjectContext:managedContext)
-        let meal = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let entity =  NSEntityDescription.entity(forEntityName: "Meal", in:managedContext)
+        let meal = NSManagedObject(entity: entity!, insertInto: managedContext)
         
         let dishId = viewModel!.dish.id
         let dishName = viewModel!.dish.name
         meal.setValue(dishId, forKey: "dish_id")
         meal.setValue(dishName, forKey: "name")
-        meal.setValue(NSDate(), forKey: "tmstmp")
+        meal.setValue(Date(), forKey: "tmstmp")
         
         do {
             try managedContext.save()
@@ -47,14 +72,14 @@ class FoodViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Favorite")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
         
         do {
             let results =
-                try managedContext.executeFetchRequest(fetchRequest)
+                try managedContext.fetch(fetchRequest)
             favorites = results as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -88,9 +113,9 @@ class FoodViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "embeddedSegue") {
-            let childViewController = segue.destinationViewController as! NutritionFactsController
+            let childViewController = segue.destination as! NutritionFactsController
             childViewController.calories = viewModel!.dish.calories
             childViewController.fat = viewModel!.dish.fat
             childViewController.cholesterol = viewModel!.dish.cholesterol
@@ -98,7 +123,7 @@ class FoodViewController: UIViewController {
             childViewController.carbs = viewModel!.dish.carbs
             
         } else if (segue.identifier == "backSegue"){
-            if let foodMenuVC = segue.destinationViewController as? FoodMenuViewController {
+            if let foodMenuVC = segue.destination as? FoodMenuViewController {
                 let thisRest = allRestaurants.filter({$0.id == viewModel!.dish.rest_id}).first
                 foodMenuVC.viewModel =  FoodMenuViewModel(restaurant: thisRest!)
             }
@@ -106,7 +131,7 @@ class FoodViewController: UIViewController {
     }
     
     @IBAction func switchChanged() {
-        if (switchButton.on){
+        if (switchButton.isOn){
             viewModel!.addFavorite()
         } else{
             viewModel!.removeFavorite()

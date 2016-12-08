@@ -10,9 +10,9 @@ import Foundation
 
 class JournalViewModel {
     
-    func foodViewModelForRowAtIndexPath(indexPath: NSIndexPath) -> FoodViewModel {
-        let mealsReverse = meals.reverse() as Array
-        let myMeal = mealsReverse[indexPath.row].valueForKey("name") as! String
+    func foodViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> FoodViewModel {
+        let mealsReverse = meals.reversed() as Array
+        let myMeal = mealsReverse[indexPath.row].value(forKey: "name") as! String
         let myDish = allDishes.filter({$0.name == myMeal}).first
         return FoodViewModel(dish: myDish!)
     }

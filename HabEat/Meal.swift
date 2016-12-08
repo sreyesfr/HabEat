@@ -9,5 +9,5 @@
 struct Meal {
     let dish_id: Int
     let name: String
-    let tmstmp: NSDate
+    let tmstmp: Date
 }

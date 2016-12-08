@@ -9,7 +9,7 @@
 import Foundation
 
 class RestaurantsViewModel {
-    let radius : Double = 10
+    let radius : Double = 3000.0
     let location : Location = Location()
     var restaurants = [Restaurant]()
     
@@ -17,29 +17,39 @@ class RestaurantsViewModel {
         return restaurants.count
     }
     
-    func titleForRowAtIndexPath(indexPath: NSIndexPath) -> String {
+    func titleForRowAtIndexPath(_ indexPath: IndexPath) -> String {
         if indexPath.row < numberOfRows(){
             return restaurants[indexPath.row].name
         } else {
             return ""
         }
     }
-    func foodMenuViewModelForRowAtIndexPath(indexPath: NSIndexPath) -> FoodMenuViewModel {
+    func foodMenuViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> FoodMenuViewModel {
         return FoodMenuViewModel(restaurant: restaurants[indexPath.row]) // Add in an input for the food items
     }
     
-    func refresh(completion: () -> Void) {
-        //location.getCurrentLocation()
-        //let result = allRestaurants.filter({distanceForm(Double($0.latitude), x2: location.latitude, y1: $0.longitude, y2: location.longitude) < radius})
-        //self.restaurants = result
-        self.restaurants = allRestaurants
-        completion()
+    func distanceForRowAtIndexPath(_ indexPath: IndexPath) -> String{
+        let distance = restaurants[indexPath.row].location.distance(from: location.cllocation)
+        let miles = distance/1609.344
+        let intDist = Int(miles)
+        let stringDec = String(miles-Double(intDist))
+        
+        let startIndex = stringDec.index(stringDec.startIndex, offsetBy: 1)
+        let endIndex = stringDec.index(stringDec.startIndex, offsetBy: 3)
+        
+        let finalDecString = stringDec[startIndex...endIndex]
+        
+        let stringResult = String(intDist) + finalDecString
+        
+        return stringResult + " mi"
     }
     
-    func distanceForm(x1: Double, x2: Double, y1: Double, y2: Double) -> Double {
-        let xDist = x2-x1
-        let yDist = y2-y1
-        let distance = sqrt((xDist * xDist) + (yDist * yDist))
-        return distance
+    func refresh(_ completion: () -> Void) {
+        location.getCurrentLocation()
+        //CLLocationDistance distanceInMeters = [location1 distanceFromLocation:location2]
+        let result = allRestaurants.filter({$0.location.distance(from: location.cllocation) < self.radius})
+        self.restaurants = result
+        //self.restaurants = allRestaurants
+        completion()
     }
 }

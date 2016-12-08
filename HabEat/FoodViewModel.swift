@@ -30,7 +30,7 @@ class FoodViewModel {
          return ((dish.calories/maxCalories + dish.fat/maxFat + dish.cholesterol/maxCholesterol + dish.sodium/maxSodium + dish.carbs/maxCarbs)/5) * 100
     }
     
-    func getHabEatIndex(percentDailyAvg: Double) -> Double {
+    func getHabEatIndex(_ percentDailyAvg: Double) -> Double {
         switch (percentDailyAvg){
         case let idx where idx < 10:
             return 10
@@ -77,21 +77,21 @@ class FoodViewModel {
     
     func addFavorite(){
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Favorite")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
         
         do {
             let results =
-                try managedContext.executeFetchRequest(fetchRequest)
+                try managedContext.fetch(fetchRequest)
             favorites = results as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         
-        let entity =  NSEntityDescription.entityForName("Favorite", inManagedObjectContext:managedContext)
-        let favorite = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let entity =  NSEntityDescription.entity(forEntityName: "Favorite", in:managedContext)
+        let favorite = NSManagedObject(entity: entity!, insertInto: managedContext)
         
                 favorite.setValue(dish.name, forKey: "name")
         favorite.setValue(dish.calories, forKey: "calories")
@@ -107,29 +107,29 @@ class FoodViewModel {
     }
     
     func removeFavorite(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Favorite")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
         
         do {
             let results =
-                try managedContext.executeFetchRequest(fetchRequest)
+                try managedContext.fetch(fetchRequest)
             favorites = results as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         
-        let favoriteToRemove = favorites.filter({String($0.valueForKey("name")!) == dish.name}).first
+        let favoriteToRemove = favorites.filter({String(describing: $0.value(forKey: "name")!) == dish.name}).first
         
-        managedContext.deleteObject(favoriteToRemove!)
-        favorites = favorites.filter({String($0.valueForKey("name")) != dish.name})
+        managedContext.delete(favoriteToRemove!)
+        favorites = favorites.filter({String(describing: $0.value(forKey: "name")) != dish.name})
     }
     
     func isFavorite() -> Bool{
         //print(favorites.first!.valueForKey("name"))
         //print(favorites.first!)
-        let favoriteNames = favorites.map({String($0.valueForKey("name")!)})
+        let favoriteNames = favorites.map({String(describing: $0.value(forKey: "name")!)})
         return favoriteNames.contains(dish.name)
     }
 

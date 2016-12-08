@@ -33,12 +33,12 @@ class FoodMenuViewController: UIViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel!.numberOfRows()
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text =  viewModel!.titleForRowAtIndexPath(indexPath)// ask the view model for the name of the restaurant and put it here
         return cell
     }
@@ -47,10 +47,10 @@ class FoodMenuViewController: UIViewController, UITableViewDataSource, UITableVi
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let foodVC = segue.destinationViewController as? FoodViewController,
-            cell = sender as? UITableViewCell,
-            indexPath = tableView.indexPathForCell(cell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let foodVC = segue.destination as? FoodViewController,
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell) {
             foodVC.viewModel =  viewModel!.foodViewModelForRowAtIndexPath(indexPath)// ask view model for a food menu view model that corresponds to this restaurant
         }
         

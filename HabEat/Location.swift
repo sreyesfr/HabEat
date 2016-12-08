@@ -11,6 +11,7 @@ import CoreLocation
 
 class Location: NSObject {
     
+    var cllocation: CLLocation
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
     var locationManager = CLLocationManager()
@@ -18,6 +19,7 @@ class Location: NSObject {
     override init() {
         self.latitude = 0.00
         self.longitude = 0.00
+        self.cllocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
         super.init()
     }
     
@@ -32,6 +34,7 @@ class Location: NSObject {
         if let currLocation = locationManager.location {
             self.latitude = currLocation.coordinate.latitude
             self.longitude = currLocation.coordinate.longitude
+            self.cllocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
         }
     }
 }

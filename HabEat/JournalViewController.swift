@@ -27,16 +27,16 @@ class JournalViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Meal")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
         
         do {
             let results =
-                try managedContext.executeFetchRequest(fetchRequest)
+                try managedContext.fetch(fetchRequest)
             meals = results as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -49,24 +49,27 @@ class JournalViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     //Replace both UITableViewDataSource methods
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return meals.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
-        let mealsReverse = meals.reverse() as Array
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        // Change color to correspond with one of the 31 days of the month
+        //colorArray = [UIColor.init(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>), ]
+        //cell!.backgroundColor = UIColor.init(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+        let mealsReverse = meals.reversed() as Array
         let meal = mealsReverse[indexPath.row]
         
         
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        formatter.timeStyle = .ShortStyle
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.medium
+        formatter.timeStyle = .short
         
-        let dateString = formatter.stringFromDate(meal.valueForKey("tmstmp")! as! NSDate)
+        let dateString = formatter.string(from: meal.value(forKey: "tmstmp")! as! Date)
         
-        cell!.textLabel?.text = meal.valueForKey("name") as! String?
+        cell!.textLabel?.text = meal.value(forKey: "name") as! String?
         cell!.detailTextLabel?.text = dateString
         
         return cell!
@@ -77,10 +80,10 @@ class JournalViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let foodVC = segue.destinationViewController as? FoodViewController,
-            cell = sender as? UITableViewCell,
-            indexPath = tableView.indexPathForCell(cell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let foodVC = segue.destination as? FoodViewController,
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell) {
             foodVC.viewModel =  viewModel.foodViewModelForRowAtIndexPath(indexPath)// ask view model for a food menu view model that corresponds to this restaurant
         }
     }

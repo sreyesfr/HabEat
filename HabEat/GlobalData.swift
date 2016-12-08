@@ -8,11 +8,12 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 
 var meals = [NSManagedObject]()
 var favorites = [NSManagedObject]()
 
-let allRestaurants = [Restaurant(id: 1, name: "Au Bon Pain", latitude: 40.443936, longitude: -79.942250), Restaurant(id:2, name: "The Exchange", latitude: 40.441486, longitude: -79.942014)]
+let allRestaurants = [Restaurant(id: 1, name: "Au Bon Pain", location: CLLocation(latitude: 40.443936, longitude: -79.942250)), Restaurant(id:2, name: "The Exchange", location: CLLocation(latitude: 40.441486, longitude: -79.942014))]
 
 
 let allDishes: [Dish] = [Dish(id: 1, rest_id : 1, name: "Two Egg and Cheddar Sandwich", calories: 450, fat: 16,

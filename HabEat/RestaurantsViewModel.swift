@@ -48,7 +48,7 @@ class RestaurantsViewModel {
         location.getCurrentLocation()
         //CLLocationDistance distanceInMeters = [location1 distanceFromLocation:location2]
         let result = allRestaurants.filter({$0.location.distance(from: location.cllocation) < self.radius})
-        self.restaurants = result
+        self.restaurants = result.sorted(by: { $0.location.distance(from: location.cllocation) < $1.location.distance(from: location.cllocation) })
         //self.restaurants = allRestaurants
         completion()
     }

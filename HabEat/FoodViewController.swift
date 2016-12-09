@@ -36,8 +36,10 @@ class FoodViewController: UIViewController {
                                         self.goToJournal()})
         let noAction = UIAlertAction(title: "No", style: .default,
                                      handler: {action in })
-        alert.addAction(yesAction)
+        // No before yes, because that's how it's done! :)
         alert.addAction(noAction)
+        alert.addAction(yesAction)
+
         present(alert, animated:true, completion:nil)
     }
     

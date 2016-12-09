@@ -92,7 +92,7 @@ class FoodViewController: UIViewController {
         //foodTitle.text = viewModel!.title()
         self.navigationItem.title = viewModel!.title()
         foodPicture.image = UIImage(named: viewModel!.dish.img)
-        habEatIdx.text = String(viewModel!.getHabEatIndex())
+        habEatIdx.text = String(Int(viewModel!.getHabEatIndex()))
         habEatView.backgroundColor = viewModel!.getBackgroundColor()
         if viewModel!.isFavorite(){
             switchButton.setOn(true, animated: true)

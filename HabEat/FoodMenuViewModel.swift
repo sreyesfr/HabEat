@@ -33,6 +33,16 @@ class FoodMenuViewModel {
             return ""
         }
     }
+    
+    func habEatIdxForRowAtIndexPath(_ indexPath: IndexPath) -> String {
+        if indexPath.row < numberOfRows(){
+            let myDishVM = FoodViewModel(dish: dishes[indexPath.row])
+            return String(Int(myDishVM.getHabEatIndex()))
+        } else {
+            return ""
+        }
+    }
+    
     func foodViewModelForRowAtIndexPath(_ indexPath: IndexPath) -> FoodViewModel {
         return FoodViewModel(dish: dishes[indexPath.row])
     }

@@ -40,6 +40,7 @@ class FoodMenuViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text =  viewModel!.titleForRowAtIndexPath(indexPath)// ask the view model for the name of the restaurant and put it here
+        cell.detailTextLabel?.text = "HabEat Index: " + viewModel!.habEatIdxForRowAtIndexPath(indexPath)
         return cell
     }
 

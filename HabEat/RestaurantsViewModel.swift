@@ -2,7 +2,7 @@
 //  RestaurantsViewModel.swift
 //  HabEat
 //
-//  Created by Sarah Reyes-Franco on 11/21/16.
+//  Created by Sarah Reyes-Franco and Connor Hanley on 11/21/16.
 //  Copyright © 2016 Sarah Reyes-Franco. All rights reserved.
 //
 
@@ -46,10 +46,8 @@ class RestaurantsViewModel {
     
     func refresh(_ completion: () -> Void) {
         location.getCurrentLocation()
-        //CLLocationDistance distanceInMeters = [location1 distanceFromLocation:location2]
         let result = allRestaurants.filter({$0.location.distance(from: location.cllocation) < self.radius})
         self.restaurants = result.sorted(by: { $0.location.distance(from: location.cllocation) < $1.location.distance(from: location.cllocation) })
-        //self.restaurants = allRestaurants
         completion()
     }
 }

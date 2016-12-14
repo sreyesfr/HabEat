@@ -2,7 +2,7 @@
 //  DishDetailViewModelTests.swift
 //  HabEat
 //
-//  Created by Sarah Reyes-Franco on 12/14/16.
+//  Created by Sarah Reyes-Franco and Connor Hanley on 12/14/16.
 //  Copyright © 2016 Sarah Reyes-Franco. All rights reserved.
 //
 

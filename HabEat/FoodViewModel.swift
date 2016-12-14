@@ -2,7 +2,7 @@
 //  FoodViewModel.swift
 //  HabEat
 //
-//  Created by Sarah Reyes-Franco on 11/30/16.
+//  Created by Sarah Reyes-Franco and Connor Hanley on 11/30/16.
 //  Copyright © 2016 Sarah Reyes-Franco. All rights reserved.
 //
 
@@ -99,8 +99,6 @@ class FoodViewModel {
         do {
             try managedContext.save()
             favorites.append(favorite)
-            print(favorite)
-            print("Favorite was saved")
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
@@ -127,8 +125,6 @@ class FoodViewModel {
     }
     
     func isFavorite() -> Bool{
-        //print(favorites.first!.valueForKey("name"))
-        //print(favorites.first!)
         let favoriteNames = favorites.map({String(describing: $0.value(forKey: "name")!)})
         return favoriteNames.contains(dish.name)
     }

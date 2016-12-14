@@ -2,7 +2,7 @@
 //  JournalViewController.swift
 //  HabEat
 //
-//  Created by Sarah Reyes-Franco on 12/4/16.
+//  Created by Sarah Reyes-Franco and Connor Hanley on 12/4/16.
 //  Copyright © 2016 Sarah Reyes-Franco. All rights reserved.
 //
 
@@ -19,7 +19,6 @@ class JournalViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //self.navigationItem.title = viewModel!.title()
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -56,9 +55,6 @@ class JournalViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        // Change color to correspond with one of the 31 days of the month
-        //colorArray = [UIColor.init(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>), ]
-        //cell!.backgroundColor = UIColor.init(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
         let mealsReverse = meals.reversed() as Array
         let meal = mealsReverse[indexPath.row]
         

@@ -11,7 +11,6 @@
 		810EE2371DE2FC04004FA767 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EE2361DE2FC04004FA767 /* RestaurantsViewModel.swift */; };
 		810EE23A1DE2FC9F004FA767 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EE2391DE2FC9F004FA767 /* Restaurant.swift */; };
 		810EE23C1DE2FD3E004FA767 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EE23B1DE2FD3E004FA767 /* Dish.swift */; };
-		810EE23E1DE2FE32004FA767 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EE23D1DE2FE32004FA767 /* Meal.swift */; };
 		810EE2451DE3079E004FA767 /* FoodMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EE2441DE3079E004FA767 /* FoodMenuViewController.swift */; };
 		810EE2471DE307AB004FA767 /* FoodMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EE2461DE307AB004FA767 /* FoodMenuViewModel.swift */; };
 		810EE24A1DE30CD0004FA767 /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EE2491DE30CD0004FA767 /* FoodViewController.swift */; };
@@ -24,7 +23,6 @@
 		810F2ED41DDE0FCF00885B6C /* HabEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F2ED31DDE0FCF00885B6C /* HabEatUITests.swift */; };
 		813635B01DF25FD7005EC8C6 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813635AF1DF25FD7005EC8C6 /* GlobalData.swift */; };
 		813A046A1DDF8D8300F754A0 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813A04691DDF8D8300F754A0 /* MenuController.swift */; };
-		818C0EB01DEF44EE00807943 /* RestaurantDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818C0EAF1DEF44EE00807943 /* RestaurantDish.swift */; };
 		818C0EB21DEF46D700807943 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818C0EB11DEF46D700807943 /* FoodViewModel.swift */; };
 		8194081B1DF381A1000E1C5D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819408191DF381A1000E1C5D /* SWRevealViewController.m */; };
 		819408201DF3DF45000E1C5D /* HabEat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8194081E1DF3DF45000E1C5D /* HabEat.xcdatamodeld */; };
@@ -60,7 +58,6 @@
 		810EE2361DE2FC04004FA767 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
 		810EE2391DE2FC9F004FA767 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		810EE23B1DE2FD3E004FA767 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
-		810EE23D1DE2FE32004FA767 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		810EE2441DE3079E004FA767 /* FoodMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodMenuViewController.swift; sourceTree = "<group>"; };
 		810EE2461DE307AB004FA767 /* FoodMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodMenuViewModel.swift; sourceTree = "<group>"; };
 		810EE2491DE30CD0004FA767 /* FoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +77,6 @@
 		810F2EE21DDE10C700885B6C /* HabEat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HabEat-Bridging-Header.h"; sourceTree = "<group>"; };
 		813635AF1DF25FD7005EC8C6 /* GlobalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		813A04691DDF8D8300F754A0 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		818C0EAF1DEF44EE00807943 /* RestaurantDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDish.swift; sourceTree = "<group>"; };
 		818C0EB11DEF46D700807943 /* FoodViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
 		819408191DF381A1000E1C5D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8194081A1DF381A1000E1C5D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -134,8 +130,6 @@
 			children = (
 				810EE2391DE2FC9F004FA767 /* Restaurant.swift */,
 				810EE23B1DE2FD3E004FA767 /* Dish.swift */,
-				818C0EAF1DEF44EE00807943 /* RestaurantDish.swift */,
-				810EE23D1DE2FE32004FA767 /* Meal.swift */,
 				810EE24B1DE30D09004FA767 /* Location.swift */,
 			);
 			name = Models;
@@ -436,7 +430,6 @@
 				810EE23A1DE2FC9F004FA767 /* Restaurant.swift in Sources */,
 				810EE24C1DE30D09004FA767 /* Location.swift in Sources */,
 				8194085F1DF48610000E1C5D /* JournalViewModel.swift in Sources */,
-				810EE23E1DE2FE32004FA767 /* Meal.swift in Sources */,
 				819408621DF48650000E1C5D /* JournalViewController.swift in Sources */,
 				810EE23C1DE2FD3E004FA767 /* Dish.swift in Sources */,
 				8194081B1DF381A1000E1C5D /* SWRevealViewController.m in Sources */,
@@ -444,7 +437,6 @@
 				81B45C3C1DF93AF200772274 /* FavoritesViewModel.swift in Sources */,
 				810EE24A1DE30CD0004FA767 /* FoodViewController.swift in Sources */,
 				810F2EB41DDE0FCF00885B6C /* AppDelegate.swift in Sources */,
-				818C0EB01DEF44EE00807943 /* RestaurantDish.swift in Sources */,
 				81B45C3A1DF93AE400772274 /* FavoritesViewController.swift in Sources */,
 				810EE2341DE2FB78004FA767 /* RestaurantsViewController.swift in Sources */,
 			);

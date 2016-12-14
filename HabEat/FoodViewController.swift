@@ -2,7 +2,7 @@
 //  FoodViewController.swift
 //  HabEat
 //
-//  Created by Sarah Reyes-Franco on 11/21/16.
+//  Created by Sarah Reyes-Franco and Connor Hanley on 11/21/16.
 //  Copyright © 2016 Sarah Reyes-Franco. All rights reserved.
 //
 
@@ -63,8 +63,6 @@ class FoodViewController: UIViewController {
         do {
             try managedContext.save()
             meals.append(meal)
-            print(meal)
-            print("Meal was saved")
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
@@ -89,7 +87,6 @@ class FoodViewController: UIViewController {
         
         self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.
-        //foodTitle.text = viewModel!.title()
         self.navigationItem.title = viewModel!.title()
         foodPicture.image = UIImage(named: viewModel!.dish.img)
         habEatIdx.text = String(Int(viewModel!.getHabEatIndex()))

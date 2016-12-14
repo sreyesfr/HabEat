@@ -32,6 +32,9 @@
 		819408621DF48650000E1C5D /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819408611DF48650000E1C5D /* JournalViewController.swift */; };
 		81B45C3A1DF93AE400772274 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B45C391DF93AE400772274 /* FavoritesViewController.swift */; };
 		81B45C3C1DF93AF200772274 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B45C3B1DF93AF200772274 /* FavoritesViewModel.swift */; };
+		81F2743E1E0199AE003AD3B4 /* RestaurantsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F2743D1E0199AE003AD3B4 /* RestaurantsViewModelTests.swift */; };
+		81F274421E0199ED003AD3B4 /* RestaurantMenuViewModeLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F274411E0199ED003AD3B4 /* RestaurantMenuViewModeLTests.swift */; };
+		81F274451E019A0C003AD3B4 /* DishDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F274441E019A0C003AD3B4 /* DishDetailViewModelTests.swift */; };
 		81FDB08A1DF9186100CF67E0 /* NutritionFactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FDB0891DF9186100CF67E0 /* NutritionFactsController.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +89,9 @@
 		819408611DF48650000E1C5D /* JournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		81B45C391DF93AE400772274 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		81B45C3B1DF93AF200772274 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		81F2743D1E0199AE003AD3B4 /* RestaurantsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModelTests.swift; sourceTree = "<group>"; };
+		81F274411E0199ED003AD3B4 /* RestaurantMenuViewModeLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantMenuViewModeLTests.swift; sourceTree = "<group>"; };
+		81F274441E019A0C003AD3B4 /* DishDetailViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishDetailViewModelTests.swift; sourceTree = "<group>"; };
 		81FDB0891DF9186100CF67E0 /* NutritionFactsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutritionFactsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +213,7 @@
 		810F2EC71DDE0FCF00885B6C /* HabEatTests */ = {
 			isa = PBXGroup;
 			children = (
+				81F274461E019A11003AD3B4 /* Classes */,
 				810F2EC81DDE0FCF00885B6C /* HabEatTests.swift */,
 				810F2ECA1DDE0FCF00885B6C /* Info.plist */,
 			);
@@ -248,6 +255,40 @@
 				81B45C3B1DF93AF200772274 /* FavoritesViewModel.swift */,
 			);
 			name = Favorites;
+			sourceTree = "<group>";
+		};
+		81F2743F1E0199BA003AD3B4 /* Restaurants */ = {
+			isa = PBXGroup;
+			children = (
+				81F2743D1E0199AE003AD3B4 /* RestaurantsViewModelTests.swift */,
+			);
+			name = Restaurants;
+			sourceTree = "<group>";
+		};
+		81F274401E0199C9003AD3B4 /* RestaurantMenu */ = {
+			isa = PBXGroup;
+			children = (
+				81F274411E0199ED003AD3B4 /* RestaurantMenuViewModeLTests.swift */,
+			);
+			name = RestaurantMenu;
+			sourceTree = "<group>";
+		};
+		81F274431E0199F7003AD3B4 /* Dish Detail */ = {
+			isa = PBXGroup;
+			children = (
+				81F274441E019A0C003AD3B4 /* DishDetailViewModelTests.swift */,
+			);
+			name = "Dish Detail";
+			sourceTree = "<group>";
+		};
+		81F274461E019A11003AD3B4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				81F2743F1E0199BA003AD3B4 /* Restaurants */,
+				81F274401E0199C9003AD3B4 /* RestaurantMenu */,
+				81F274431E0199F7003AD3B4 /* Dish Detail */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,6 +455,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				810F2EC91DDE0FCF00885B6C /* HabEatTests.swift in Sources */,
+				81F274421E0199ED003AD3B4 /* RestaurantMenuViewModeLTests.swift in Sources */,
+				81F2743E1E0199AE003AD3B4 /* RestaurantsViewModelTests.swift in Sources */,
+				81F274451E019A0C003AD3B4 /* DishDetailViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
